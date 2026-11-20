@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MEME HUNTER AI — Solana Meme Coin Research & Risk Monitor.">
+  <meta name="theme-color" content="#080B10">
+  <title>MEME HUNTER AI | Solana Intelligence</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #080B10;
+      color: #F2F5F8;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, 90%); margin: auto; }
+    header {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #26313D;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 1px; }
+    .logo {
+      width: 38px; height: 38px; border-radius: 11px;
+      display: grid; place-items: center;
+      color: #080B10; font-weight: 900;
+      background: linear-gradient(135deg, #25D695, #63A9FF);
+    }
+    nav { display: flex; gap: 26px; color: #8492A3; font-size: 13px; }
+    nav a:hover { color: #25D695; }
+    .hero { padding: 105px 0 90px; text-align: center; }
+    .tag {
+      display: inline-block; padding: 8px 13px; border-radius: 30px;
+      border: 1px solid #285443; color: #25D695;
+      font-size: 11px; letter-spacing: 2px;
+    }
+    h1 {
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 1.05; letter-spacing: -3px;
+      margin: 28px 0 20px;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #25D695, #63A9FF);
+      color: transparent; background-clip: text;
+    }
+    .lead { color: #A5B1BF; font-size: 17px; line-height: 1.8; max-width: 650px; margin: auto; }
+    .actions { display: flex; justify-content: center; gap: 13px; margin-top: 34px; flex-wrap: wrap; }
+    .btn {
+      padding: 14px 22px; border-radius: 9px;
+      border: 1px solid #344353; font-size: 13px; font-weight: 700;
+    }
+    .primary { background: #25D695; color: #07110D; border-color: #25D695; }
+    .primary:hover { background: #55E6B0; }
+    .secondary:hover { border-color: #63A9FF; }
+    .dashboard {
+      margin: 0 auto; max-width: 850px; padding: 22px;
+      border: 1px solid #26313D; border-radius: 18px;
+      background: linear-gradient(145deg, #121B25, #0C1118);
+      box-shadow: 0 25px 90px #0008;
+      text-align: left;
+    }
+    .dash-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .status { color: #25D695; font-size: 11px; }
+    .dash-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 22px; }
+    .metric { background: #151E29; padding: 18px; border-radius: 11px; border: 1px solid #26313D; }
+    .metric small { color: #8492A3; display: block; margin-bottom: 10px; }
+    .metric strong { font-size: 19px; }
+    section { padding: 75px 0; }
+    .section-label { color: #25D695; font-size: 11px; letter-spacing: 2px; }
+    h2 { font-size: clamp(28px, 4vw, 42px); margin: 13px 0; }
+    .sub { color: #8492A3; line-height: 1.8; }
+    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 32px; }
+    .card {
+      background: #111720; border: 1px solid #26313D;
+      border-radius: 14px; padding: 24px;
+    }
+    .card .number { color: #63A9FF; font-size: 12px; letter-spacing: 2px; }
+    .card h3 { margin: 18px 0 10px; }
+    .card p { color: #8492A3; font-size: 13px; line-height: 1.8; }
+    .security {
+      border: 1px solid #285443; background: #0D1917;
+      border-radius: 15px; padding: 28px; margin-top: 25px;
+    }
+    .security p { color: #A5B1BF; line-height: 1.8; }
+    footer { border-top: 1px solid #26313D; padding: 28px 0; color: #8492A3; font-size: 12px; line-height: 1.8; }
+    @media(max-width:700px) {
+      nav { display: none; }
+      .hero { padding: 75px 0 60px; }
+      .dash-grid, .cards { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -1.5px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="#">
+      <span class="logo">MH</span>
+      <span>MEME HUNTER AI</span>
+    </a>
+    <nav>
+      <a href="#about">ABOUT</a>
+      <a href="#features">FEATURES</a>
+      <a href="#security">SECURITY</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero wrap">
+      <div class="tag">SOLANA INTELLIGENCE SYSTEM</div>
+      <h1>HUNT SMARTER.<br><span>TRADE SAFER.</span></h1>
+      <p class="lead">
+        A research and risk-monitoring assistant for the Solana meme coin ecosystem.
+        Turn market data into clearer research decisions.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#features">EXPLORE PLATFORM ↗</a>
+        <a class="btn secondary" href="#about">LEARN MORE</a>
+      </div>
+
+      <div class="dashboard" style="margin-top:65px">
+        <div class="dash-top">
+          <strong>MEME HUNTER / SYSTEM OVERVIEW</strong>
+          <span class="status">● RESEARCH MODE</span>
+        </div>
+        <div class="dash-grid">
+          <div class="metric">
+            <small>AI RESEARCH</small>
+            <strong>GPT Analysis</strong>
+          </div>
+          <div class="metric">
+            <small>MARKET DATA</small>
+            <strong>Solana DEX</strong>
+          </div>
+          <div class="metric">
+            <small>RISK CONTROL</small>
+            <strong>Risk Monitor</strong>
+          </div>
+        </div>
+        <p class="sub" style="font-size:12px;margin:20px 0 0">
+          Research tools and market information. No guaranteed returns.
+        </p>
+      </div>
+    </div>
+
+    <section id="about" class="wrap">
+      <div class="section-label">01 / ABOUT</div>
+      <h2>Intelligence before action.</h2>
+      <p class="sub">
+        MEME HUNTER AI is designed to help users research Solana meme coins,
+        review market information, and identify potential risks before making
+        their own decisions.
+      </p>
+    </section>
+
+    <section id="features" class="wrap">
+      <div class="section-label">02 / PLATFORM FEATURES</div>
+      <h2>One platform. Multiple perspectives.</h2>
+      <p class="sub">A research-first approach to a fast-moving market.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="number">01 — AI INTELLIGENCE</div>
+          <h3>AI Token Research</h3>
+          <p>Organize token information, review potential catalysts, and identify missing data with AI-assisted analysis.</p>
+        </article>
+        <article class="card">
+          <div class="number">02 — MARKET SCANNER</div>
+          <h3>Solana Market Monitor</h3>
+          <p>Review available DEX market data, including liquidity, trading volume, and price movement.</p>
+        </article>
+        <article class="card">
+          <div class="number">03 — RISK GUARD</div>
+          <h3>Risk Assessment</h3>
+          <p>Highlight research gaps and potential risks such as concentrated ownership, low liquidity, and volatility.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="security" class="wrap">
+      <div class="section-label">03 / SECURITY & TRANSPARENCY</div>
+      <h2>Your wallet. Your approval.</h2>
+      <div class="security">
+        <h3>Wallet safety comes first.</h3>
+        <p>
+          Wallet connection and transaction approval should remain under the
+          user's control. Never share your recovery phrase or private keys.
+          Always review transaction details in your wallet before approving.
+        </p>
+        <p>
+          MEME HUNTER AI is a research assistant, not a financial adviser.
+          Crypto assets, especially meme coins, are highly volatile and may
+          result in a total loss of funds.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>MEME HUNTER AI</strong><br>
+      Solana Meme Coin Research & Risk Monitor<br>
+      © 2026 MEME HUNTER AI. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
