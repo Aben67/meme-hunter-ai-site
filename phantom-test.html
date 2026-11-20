@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEME HUNTER AI - Phantom Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 35px 20px;
+      background: #080B10; color: #F2F5F8;
+      font-family: Arial, sans-serif;
+    }
+    main { max-width: 520px; margin: 45px auto; }
+    h1 { font-size: 28px; }
+    p { color: #8492A3; line-height: 1.7; }
+    .card {
+      background: #111720; border: 1px solid #26313D;
+      border-radius: 16px; padding: 22px; margin-top: 22px;
+    }
+    button {
+      width: 100%; padding: 15px; margin-top: 12px;
+      border: 0; border-radius: 10px;
+      background: #25D695; color: #06120D;
+      font-size: 15px; font-weight: bold;
+    }
+    button.secondary {
+      background: #202B38; color: white;
+      border: 1px solid #354454;
+    }
+    button:disabled { opacity: .5; }
+    #status { color: #25D695; overflow-wrap: anywhere; }
+    #address { overflow-wrap: anywhere; color: #63A9FF; }
+    small { color: #8492A3; line-height: 1.6; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>MEME HUNTER AI</h1>
+  <p>PHANTOM WALLET CONNECTION TEST</p>
+
+  <section class="card">
+    <h3>Wallet Status</h3>
+    <p id="status">尚未連接錢包</p>
+    <button id="connect">CONNECT PHANTOM</button>
+    <button id="disconnect" class="secondary" disabled>
+      DISCONNECT
+    </button>
+  </section>
+
+  <section class="card">
+    <h3>Solana Wallet Address</h3>
+    <p id="address">尚未取得地址</p>
+  </section>
+
+  <section class="card">
+    <h3>Message Signature Test</h3>
+    <p>這只會簽署一段測試文字，不會轉帳或支付網路費。</p>
+    <button id="sign" disabled>SIGN TEST MESSAGE</button>
+    <p id="signature"></p>
+  </section>
+
+  <p><small>
+    測試版本：不會建立交易、不會要求助記詞或私鑰。
+    請只在 Phantom 顯示的內容符合預期時才批准。
+  </small></p>
+</main>
+
+<script>
+  let provider = null;
+
+  const statusEl = document.getElementById("status");
+  const addressEl = document.getElementById("address");
+  const signatureEl = document.getElementById("signature");
+  const connectBtn = document.getElementById("connect");
+  const disconnectBtn = document.getElementById("disconnect");
+  const signBtn = document.getElementById("sign");
+
+  function getProvider() {
+    return window.phantom?.solana ||
+      (window.solana?.isPhantom ? window.solana : null);
+  }
+
+  function setConnected(address) {
+    statusEl.textContent = "Phantom 已連接";
+    addressEl.textContent = address;
+    connectBtn.disabled = true;
+    disconnectBtn.disabled = false;
+    signBtn.disabled = false;
+  }
+
+  connectBtn.addEventListener("click", async () => {
+    try {
+      provider = getProvider();
+
+      if (!provider?.isPhantom) {
+        statusEl.textContent =
+          "找不到 Phantom。請使用 Phantom App 內建瀏覽器開啟本頁。";
+        return;
+      }
+
+      statusEl.textContent = "等待 Phantom 授權...";
+      const result = await provider.connect();
+
+      setConnected(result.publicKey.toString());
+    } catch (error) {
+      statusEl.textContent =
+        "連接失敗：" + (error.message || "使用者取消或發生錯誤");
+    }
+  });
+
+  disconnectBtn.addEventListener("click", async () => {
+    try {
+      await provider?.disconnect();
+    } catch (error) {}
+
+    provider = null;
+    statusEl.textContent = "已斷開連接";
+    addressEl.textContent = "尚未取得地址";
+    signatureEl.textContent = "";
+    connectBtn.disabled = false;
+    disconnectBtn.disabled = true;
+    signBtn.disabled = true;
+  });
+
+  signBtn.addEventListener("click", async () => {
+    try {
+      if (!provider?.publicKey) {
+        throw new Error("請先連接 Phantom");
+      }
+
+      const message =
+        "MEME HUNTER AI wallet ownership test. No transaction.";
+
+      const encodedMessage = new TextEncoder().encode(message);
+
+      statusEl.textContent = "請在 Phantom 確認訊息簽名...";
+
+      const result = await provider.signMessage(
+        encodedMessage,
+        "utf8"
+      );
+
+      const signature = result.signature;
+      signatureEl.textContent =
+        "簽名成功！Signature bytes: " + signature.length;
+
+      statusEl.textContent = "訊息簽名測試成功";
+    } catch (error) {
+      statusEl.textContent =
+        "簽名未完成：" + (error.message || "發生錯誤");
+    }
+  });
+
+  window.addEventListener("load", () => {
+    if (!getProvider()) {
+      statusEl.textContent =
+        "尚未偵測到 Phantom，請從 Phantom App 內建瀏覽器開啟。";
+    }
+  });
+</script>
+</body>
+</html>
